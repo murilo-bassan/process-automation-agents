@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Synthetic process for demos and tests. Not modeled on any real organization. -->
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="defs-invoice" targetNamespace="https://example.org/processlens">
+  <bpmn:process id="invoice_intake" name="Supplier invoice intake" isExecutable="false">
+    <bpmn:laneSet id="lanes">
+      <bpmn:lane id="lane_ap" name="Accounts Payable">
+        <bpmn:flowNodeRef>t_receive</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_classify</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_extract</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_check_po</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_enter_erp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_notify</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="lane_mgr" name="Budget Owner">
+        <bpmn:flowNodeRef>t_approve</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="lane_treasury" name="Treasury">
+        <bpmn:flowNodeRef>t_schedule</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="start" name="Invoice arrives by e-mail"/>
+    <bpmn:userTask id="t_receive" name="Download invoice attachment from shared mailbox"/>
+    <bpmn:userTask id="t_classify" name="Classify invoice type and route to the right analyst"/>
+    <bpmn:userTask id="t_extract" name="Read PDF and extract invoice fields"/>
+    <bpmn:userTask id="t_check_po" name="Check invoice against purchase order and receipt"/>
+    <bpmn:exclusiveGateway id="g_match" name="Three-way match ok?"/>
+    <bpmn:userTask id="t_approve" name="Approve exception above tolerance"/>
+    <bpmn:userTask id="t_enter_erp" name="Enter invoice data into the ERP"/>
+    <bpmn:serviceTask id="t_schedule" name="Schedule payment run"/>
+    <bpmn:userTask id="t_notify" name="Send e-mail confirmation to supplier"/>
+    <bpmn:endEvent id="end" name="Invoice registered"/>
+    <bpmn:sequenceFlow id="f1" sourceRef="start" targetRef="t_receive"/>
+    <bpmn:sequenceFlow id="f2" sourceRef="t_receive" targetRef="t_classify"/>
+    <bpmn:sequenceFlow id="f3" sourceRef="t_classify" targetRef="t_extract"/>
+    <bpmn:sequenceFlow id="f4" sourceRef="t_extract" targetRef="t_check_po"/>
+    <bpmn:sequenceFlow id="f5" sourceRef="t_check_po" targetRef="g_match"/>
+    <bpmn:sequenceFlow id="f6" name="no" sourceRef="g_match" targetRef="t_approve"/>
+    <bpmn:sequenceFlow id="f7" name="yes" sourceRef="g_match" targetRef="t_enter_erp"/>
+    <bpmn:sequenceFlow id="f8" sourceRef="t_approve" targetRef="t_enter_erp"/>
+    <bpmn:sequenceFlow id="f9" sourceRef="t_enter_erp" targetRef="t_schedule"/>
+    <bpmn:sequenceFlow id="f10" sourceRef="t_schedule" targetRef="t_notify"/>
+    <bpmn:sequenceFlow id="f11" sourceRef="t_notify" targetRef="end"/>
+  </bpmn:process>
+</bpmn:definitions>

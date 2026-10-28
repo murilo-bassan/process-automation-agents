@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Processo sintético para demonstração e testes. Não representa nenhum órgão ou empresa real. -->
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" id="defs-reembolso" targetNamespace="https://example.org/processlens">
+  <bpmn:process id="reembolso_viagem" name="Reembolso de despesas de viagem" isExecutable="false">
+    <bpmn:laneSet id="lanes">
+      <bpmn:lane id="lane_colab" name="Colaborador">
+        <bpmn:flowNodeRef>t_preencher</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="lane_fin" name="Financeiro">
+        <bpmn:flowNodeRef>t_conferir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_lancar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>t_notificar</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="lane_gestor" name="Gestor">
+        <bpmn:flowNodeRef>t_aprovar</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="inicio" name="Viagem concluída"/>
+    <bpmn:userTask id="t_preencher" name="Preencher planilha de despesas e anexar comprovantes"/>
+    <bpmn:userTask id="t_conferir" name="Conferir comprovantes com a política de viagens"/>
+    <bpmn:exclusiveGateway id="g_ok" name="Dentro da política?"/>
+    <bpmn:userTask id="t_aprovar" name="Aprovar reembolso fora da política"/>
+    <bpmn:userTask id="t_lancar" name="Lançar reembolso no sistema financeiro"/>
+    <bpmn:sendTask id="t_notificar" name="Notificar colaborador por e-mail"/>
+    <bpmn:endEvent id="fim" name="Reembolso pago"/>
+    <bpmn:sequenceFlow id="r1" sourceRef="inicio" targetRef="t_preencher"/>
+    <bpmn:sequenceFlow id="r2" sourceRef="t_preencher" targetRef="t_conferir"/>
+    <bpmn:sequenceFlow id="r3" sourceRef="t_conferir" targetRef="g_ok"/>
+    <bpmn:sequenceFlow id="r4" name="não" sourceRef="g_ok" targetRef="t_aprovar"/>
+    <bpmn:sequenceFlow id="r5" name="sim" sourceRef="g_ok" targetRef="t_lancar"/>
+    <bpmn:sequenceFlow id="r6" sourceRef="t_aprovar" targetRef="t_lancar"/>
+    <bpmn:sequenceFlow id="r7" sourceRef="t_lancar" targetRef="t_notificar"/>
+    <bpmn:sequenceFlow id="r8" sourceRef="t_notificar" targetRef="fim"/>
+  </bpmn:process>
+</bpmn:definitions>

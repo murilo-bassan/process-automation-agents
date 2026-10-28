@@ -1,0 +1,11 @@
+[project]
+name = "process-automation-agents"
+version = "0.1.0"
+description = "LangGraph pipeline that finds what to automate in a BPMN process and proves every claim with evidence."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Murilo Bassan" }]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
