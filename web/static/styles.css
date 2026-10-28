@@ -276,7 +276,7 @@ pre.json {
 .stage.llm .n { color: var(--violet); }
 .stage.rule .n { color: var(--accent); }
 .matrix {
-  position: relative; height: 360px; margin: 6px 0 4px;
+  position: relative; height: 300px; margin: 6px 0 4px;
   background:
     linear-gradient(var(--line-strong), var(--line-strong)) 55% 0 / 1px 100% no-repeat,
     linear-gradient(var(--line-strong), var(--line-strong)) 0 45% / 100% 1px no-repeat,
@@ -299,3 +299,5 @@ pre.json {
 q { color: var(--accent); }
 .q-chip-high { color: var(--accent); }
 .q-chip-NI { color: var(--danger); }
+.card.scroll .bar { min-width: 56px; width: 64px; }
+.card.scroll td:nth-child(2) { min-width: 240px; }

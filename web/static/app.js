@@ -76,6 +76,12 @@ function pipeline(r) {
 }
 
 function matrix(r) {
+  const taken = {};
+  const place = (c) => {  // candidates with identical scores are fanned out instead of stacked
+    const key = `${c.score.feasibility.toFixed(2)}|${c.score.impact.toFixed(2)}`;
+    const n = (taken[key] = (taken[key] ?? -1) + 1);
+    return `left:calc(${(4 + c.score.feasibility * 92).toFixed(1)}% + ${n * 34}px);bottom:${(4 + c.score.impact * 88).toFixed(1)}%`;
+  };
   return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, "Priority matrix"), h("span", { class: "muted mono" }, "impact × feasibility")),
     h("div", { class: "body" }, h("div", { class: "matrix" },
       h("span", { class: "ax", style: "right:10px;bottom:8px" }, "feasibility →"),
@@ -83,20 +89,19 @@ function matrix(r) {
       h("span", { class: "ax", style: "right:10px;top:8px;color:var(--accent)" }, "quick wins"),
       r.candidates.map((c) => h("span", {
         class: `mdot ${c.score.quadrant}`, title: c.title,
-        style: `left:${(4 + c.score.feasibility * 92).toFixed(1)}%;bottom:${(4 + c.score.impact * 88).toFixed(1)}%`,
+        style: place(c),
         onclick: () => { state.selected = c.id; render(); },
       }, c.id)))));
 }
 
 function table(r) {
   return h("section", { class: "card scroll" }, h("header", {}, h("span", { class: "label" }, `Candidates · ${r.candidates.length} of ${r.proposed} survived`)),
-    h("table", {}, h("thead", {}, h("tr", {}, ["#", "Candidate", "Impact", "Feasibility", "Evidence", "Quadrant"].map((c) => h("th", {}, c)))),
+    h("table", {}, h("thead", {}, h("tr", {}, ["#", "Candidate", "Impact", "Feasibility", "Quadrant"].map((c) => h("th", {}, c)))),
       h("tbody", {}, r.candidates.map((c) => h("tr", { class: "clickable" + (c.id === state.selected ? " active" : ""), onclick: () => { state.selected = c.id; render(); } },
         h("td", { class: "mono" }, c.id),
         h("td", {}, h("div", {}, c.title.split(": ").slice(1).join(": ")), h("div", { class: "hash" }, c.title.split(": ")[0])),
         h("td", {}, h("div", { class: "bar" }, h("i", { style: `width:${c.score.impact * 100}%` })), h("span", { class: "hash" }, c.score.impact.toFixed(2))),
         h("td", {}, h("div", { class: "bar" }, h("i", { style: `width:${c.score.feasibility * 100}%` })), h("span", { class: "hash" }, c.score.feasibility.toFixed(2))),
-        h("td", { class: "mono" }, `${Math.round(c.score.coverage * 100)}%`),
         h("td", {}, h("span", { class: QUAD[c.score.quadrant][1] }, QUAD[c.score.quadrant][0])))))));
 }
 
@@ -147,7 +152,8 @@ function render() {
               h("span", { class: "chip ok" }, `${r.document.facts.minutes_per_case ?? "NI"} min / case`)),
             h("div", { class: "meta-row" }, r.document.facts.systems.map((s) => h("span", { class: "chip violet" }, s))))) : null,
           r ? notes(r) : null),
-        r ? h("div", { class: "stack", style: "gap:20px" }, pipeline(r), h("div", { class: "grid two" }, matrix(r), detail(r)), table(r))
+        r ? h("div", { class: "stack", style: "gap:20px" }, pipeline(r),
+          h("div", { class: "grid", style: "grid-template-columns:340px minmax(0,1fr);align-items:start" }, matrix(r), table(r)), detail(r))
           : h("section", { class: "card empty" }, h("p", {}, "Upload a BPMN and its description, or run a sample."),
             h("p", { class: "muted" }, "Models propose and answer; code verifies evidence and computes every score."))))));
 }
