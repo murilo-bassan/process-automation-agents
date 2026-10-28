@@ -10,7 +10,7 @@ and proves every claim with evidence — then scores it with a rubric, not a vib
 ![tests](https://img.shields.io/badge/tests-34%20passing-000?style=flat-square&labelColor=000&color=c6ff00)
 ![license](https://img.shields.io/badge/license-MIT-000?style=flat-square&labelColor=000&color=2a2a2a)
 
-[English](#english) · [Português](#português)
+**English** · [Português](README.pt-BR.md)
 
 <img src="docs/screenshots/assessment.png" alt="processlens" width="100%">
 
@@ -18,9 +18,7 @@ and proves every claim with evidence — then scores it with a rubric, not a vib
 
 ---
 
-## English
-
-### What it does
+## What it does
 
 Input: a **BPMN 2.0** model (Camunda / Bizagi / bpmn.io export) and the process
 **description** (Markdown, text or PDF). Output: a ranked list of automation
@@ -29,7 +27,7 @@ triage, API integration, RPA, notification, decision support), the evidence
 that supports it, a questionnaire with cited answers, and impact × feasibility
 scores — as JSON, Markdown, a standalone HTML report and a **DOCX**.
 
-### The pipeline
+## The pipeline
 
 ```mermaid
 flowchart LR
@@ -52,7 +50,7 @@ flowchart LR
 Violet = model call (one model per stage, structured JSON, bounded self-repair).
 Lime = deterministic code. **Models propose; code decides** ([ADR 0001](docs/adr/0001-models-propose-code-decides.md)).
 
-### What it demonstrates
+## What it demonstrates
 
 - **Hallucination containment, mechanically.** Every evidence item must point to a BPMN
   element or sentence id that exists, and its quote must actually appear there
@@ -74,7 +72,7 @@ Lime = deterministic code. **Models propose; code decides** ([ADR 0001](docs/adr
   rule/exception/compliance signals), upload size limits.
 - **Business-ready output**: priority matrix, DOCX for the people who live in Word.
 
-### Quick start
+## Quick start
 
 ```bash
 git clone https://github.com/murilo-bassan/process-automation-agents.git
@@ -86,6 +84,8 @@ python -m processlens.cli samples/invoice-intake.bpmn samples/invoice-intake.md 
 python -m uvicorn processlens.api:app --port 8810 # UI → http://localhost:8810 · OpenAPI → /docs
 ```
 
+The UI switches between EN and PT-BR.
+
 With a real model (any OpenAI-compatible endpoint — the key comes from your
 environment, never from the repository):
 
@@ -93,7 +93,7 @@ environment, never from the repository):
 export PL_PROVIDER=openai LLM_API_KEY=... PL_MODEL_GENERATE=... PL_MODEL_CRITIC=... PL_MODEL_QUESTIONNAIRE=...
 ```
 
-### Samples (synthetic)
+## Samples (synthetic)
 
 | Sample | Language | Tasks | Notes |
 |---|---|---|---|
@@ -104,39 +104,10 @@ export PL_PROVIDER=openai LLM_API_KEY=... PL_MODEL_GENERATE=... PL_MODEL_CRITIC=
 |---|---|
 | <img src="docs/screenshots/document-ai-full.png" alt="detail"> | <img src="docs/screenshots/html-report.png" alt="html report"> |
 
-### Decisions
+## Decisions
 - [0001 — Models propose, code decides](docs/adr/0001-models-propose-code-decides.md)
 - [0002 — One model per stage, structured output with bounded repair](docs/adr/0002-one-model-per-stage.md)
 - [0003 — LangGraph for orchestration, thin nodes](docs/adr/0003-langgraph-for-orchestration.md)
-
----
-
-## Português
-
-### O que faz
-
-Recebe um modelo **BPMN 2.0** e a **descrição do processo** (Markdown, texto ou
-PDF) e devolve as oportunidades de automação ranqueadas: a técnica adequada
-(motor de regras, IA documental, triagem por LLM, integração por API, RPA,
-notificação, apoio à decisão), as **evidências** que sustentam cada uma, um
-questionário com respostas citadas e as notas de impacto × viabilidade — em
-JSON, Markdown, HTML e **DOCX**.
-
-### O que demonstra
-
-- **Contenção de alucinação por código**: toda evidência precisa apontar para um elemento do BPMN ou uma sentença que existe, e a citação precisa aparecer lá. Candidata sem evidência dupla (BPMN + descrição) é descartada e reportada.
-- **Nota explicável**: o modelo só responde um questionário fixo citando sentenças (ou `NI`, não informado); a nota sai de pesos publicados. Mesmas respostas → mesma nota.
-- **Saída estruturada com autocorreção**: JSON Schema, validação Pydantic, erros devolvidos ao modelo por até *n* tentativas.
-- **Um modelo por estágio** (gerador e crítico diferentes) e **auditor independente** que sinaliza sem reescrever.
-- **LangGraph** com estado tipado, reducers aditivos e ramos paralelos.
-- **Documentos reais**: BPMN com proteção contra XXE, PDF, extração bilíngue de fatos (volume, tempo, sistemas, regras, exceções, auditoria).
-
-Roda 100% offline com um analista determinístico; para usar um modelo real, `PL_PROVIDER=openai` e a chave no seu ambiente — nunca no repositório.
-
-```bash
-pip install -r requirements-dev.txt && python -m pytest
-python -m uvicorn processlens.api:app --port 8810
-```
 
 ---
 
