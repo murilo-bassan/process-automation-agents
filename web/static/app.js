@@ -147,7 +147,7 @@ function intake() {
     h("header", {}, h("span", { class: "label" }, t("Analyze a process")), h("span", { class: "chip violet" }, t("LangGraph · 8 nodes"))),
     h("div", { class: "body stack" },
       h("div", { class: "grid two", style: "gap:10px" }, picker("bpmn", "BPMN 2.0", ".bpmn,.xml"), picker("doc", t("Description"), ".md,.txt,.pdf")),
-      h("button", { class: "btn primary", disabled: !(state.files.bpmn && state.files.doc) || state.busy, onclick: upload }, state.busy ? "analyzing…" : t("Run analysis ▸")),
+      h("button", { class: "btn primary", disabled: !(state.files.bpmn && state.files.doc) || state.busy, onclick: upload }, state.busy ? t("analyzing…") : t("Run analysis ▸")),
       h("div", { class: "row" }, h("span", { class: "label" }, t("or a synthetic sample")),
         h("button", { class: "btn", onclick: () => sample("invoice-intake"), disabled: state.busy }, "invoice intake · EN"),
         h("button", { class: "btn", onclick: () => sample("reembolso-viagem"), disabled: state.busy }, "reembolso · PT"))));
@@ -181,7 +181,7 @@ function matrix(r) {
 
 function table(r) {
   return h("section", { class: "card scroll" }, h("header", {}, h("span", { class: "label" }, `${t("Candidates")} · ${r.candidates.length} ${t("of")} ${r.proposed} ${t("survived")}`)),
-    h("table", {}, h("thead", {}, h("tr", {}, ["#", t("Candidate"), t("Impact"), t("Feasibility"), "Quadrant"].map((c) => h("th", {}, c)))),
+    h("table", {}, h("thead", {}, h("tr", {}, ["#", t("Candidate"), t("Impact"), t("Feasibility"), t("Quadrant")].map((c) => h("th", {}, c)))),
       h("tbody", {}, r.candidates.map((c) => h("tr", { class: "clickable" + (c.id === state.selected ? " active" : ""), onclick: () => { state.selected = c.id; render(); } },
         h("td", { class: "mono" }, c.id),
         h("td", {}, h("div", {}, c.title.split(": ").slice(1).join(": ")), h("div", { class: "hash" }, c.title.split(": ")[0])),
@@ -208,14 +208,14 @@ function detail(r) {
         h("td", { class: "mono", title: a.evidence_ref ? r.sentences[a.evidence_ref] : "" }, a.evidence_ref || "—"),
         h("td", { class: "muted" }, tj(a.justification)),
         h("td", { class: "hash" }, `+${(c.score.breakdown[a.question] ?? 0).toFixed(2)}`))))),
-      issues.length ? h("div", { class: "stack" }, issues.map((i) => h("div", { class: "row" }, h("span", { class: i.severity === t("blocker") ? "chip bad" : i.severity === t("warning") ? "chip warn" : "chip" }, t(i.severity)), h("span", { class: "muted" }, i.message)))) : null));
+      issues.length ? h("div", { class: "stack" }, issues.map((i) => h("div", { class: "row" }, h("span", { class: i.severity === "blocker" ? "chip bad" : i.severity === "warning" ? "chip warn" : "chip" }, t(i.severity)), h("span", { class: "muted" }, i.message)))) : null));
 }
 
 function notes(r) {
   const global = r.issues.filter((i) => i.stage !== "audit" || !i.candidate_id);
   if (!global.length) return null;
   return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("Critic & traceability notes"))),
-    h("div", { class: "body stack" }, global.map((i) => h("div", { class: "row" }, h("span", { class: i.severity === t("blocker") ? "chip bad" : "chip warn" }, i.stage), h("span", { class: "mono" }, i.candidate_id || ""), h("span", { class: "muted" }, i.message)))));
+    h("div", { class: "body stack" }, global.map((i) => h("div", { class: "row" }, h("span", { class: i.severity === "blocker" ? "chip bad" : "chip warn" }, i.stage), h("span", { class: "mono" }, i.candidate_id || ""), h("span", { class: "muted" }, i.message)))));
 }
 
 function render() {
