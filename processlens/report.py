@@ -61,20 +61,20 @@ def to_markdown(report: dict[str, Any]) -> str:
 
 
 _CSS = """
-:root{--bg:#000;--s:#070707;--l:#1c1c1c;--ink:#f4f4f0;--m:#7a7a76;--a:#c6ff00;--v:#a58bff;--w:#ffb020;--d:#ff4d5e}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 Inter,system-ui,sans-serif;padding:40px 16px}
-main{max-width:1080px;margin:0 auto}h1{font:600 34px/1.1 'Space Grotesk',system-ui;letter-spacing:-.02em;margin:6px 0 10px}
-h2{font:600 19px 'Space Grotesk',system-ui;margin:0}.label{font:500 10.5px ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
-.card{border:1px solid var(--l);border-radius:3px;background:var(--s);margin:18px 0;padding:18px}
-.chip{display:inline-block;border:1px solid #2a2a2a;border-radius:2px;padding:1px 7px;font:500 10.5px ui-monospace,monospace;text-transform:uppercase;letter-spacing:.06em}
-.qw{color:var(--a);border-color:rgba(198,255,0,.4)}.st{color:var(--v);border-color:rgba(165,139,255,.4)}.fi{color:var(--w);border-color:rgba(255,176,32,.4)}.re{color:var(--d);border-color:rgba(255,77,94,.4)}
-table{width:100%;border-collapse:collapse;margin-top:10px}td,th{text-align:left;padding:7px 9px;border-bottom:1px solid var(--l);vertical-align:top}
-th{font:500 10.5px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m)}
-.mono{font-family:ui-monospace,monospace;font-size:12.5px}.muted{color:var(--m)}q{color:var(--a)}
-.matrix{position:relative;height:340px;border:1px solid var(--l);background:linear-gradient(var(--l),var(--l)) 55% 0/1px 100% no-repeat,linear-gradient(var(--l),var(--l)) 0 45%/100% 1px no-repeat}
-.dot{position:absolute;transform:translate(-50%,50%);background:var(--a);color:#000;font:600 11px ui-monospace,monospace;padding:2px 6px;border-radius:2px}
-.ax{position:absolute;font:10.5px ui-monospace,monospace;color:var(--m)}
-.bar{height:4px;background:#121212;border-radius:2px;overflow:hidden;width:110px;display:inline-block;vertical-align:middle}.bar i{display:block;height:100%;background:var(--a)}
+:root{--bg:#000;--s:#111113;--l:#222226;--ink:#f5f5f2;--m:#92928c;--a:#c6ff00;--v:#a58bff;--w:#ffb547;--d:#ff5c6c}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 Geist,'Segoe UI',system-ui,sans-serif;padding:40px 16px;-webkit-font-smoothing:antialiased}
+main{max-width:1080px;margin:0 auto}h1{font:600 32px/1.1 Geist,'Segoe UI',system-ui,sans-serif;letter-spacing:-.03em;margin:6px 0 10px}
+h2{font:600 19px Geist,'Segoe UI',system-ui,sans-serif;letter-spacing:-.01em;margin:0}.label{font:500 13px Geist,'Segoe UI',system-ui,sans-serif;color:var(--m)}
+.card{border:1px solid var(--l);border-radius:14px;background:var(--s);margin:18px 0;padding:20px}
+.chip{display:inline-block;border:1px solid #323238;border-radius:999px;padding:1px 10px;font:500 12.5px Geist,'Segoe UI',system-ui,sans-serif}
+.qw{color:var(--a);border-color:rgba(198,255,0,.4)}.st{color:var(--v);border-color:rgba(165,139,255,.4)}.fi{color:var(--w);border-color:rgba(255,181,71,.4)}.re{color:var(--d);border-color:rgba(255,92,108,.4)}
+table{width:100%;border-collapse:collapse;margin-top:10px}td,th{text-align:left;padding:9px 10px;border-bottom:1px solid var(--l);vertical-align:top}
+th{font:500 13px Geist,'Segoe UI',system-ui,sans-serif;color:var(--m)}
+.mono{font-family:'Geist Mono',ui-monospace,monospace;font-size:13px}.muted{color:var(--m)}q{color:var(--a)}
+.matrix{position:relative;height:340px;border:1px solid var(--l);border-radius:10px;background:linear-gradient(var(--l),var(--l)) 55% 0/1px 100% no-repeat,linear-gradient(var(--l),var(--l)) 0 45%/100% 1px no-repeat}
+.dot{position:absolute;transform:translate(-50%,50%);background:var(--a);color:#000;font:600 12px Geist,'Segoe UI',system-ui,sans-serif;padding:3px 9px;border-radius:999px}
+.ax{position:absolute;font:500 12.5px Geist,'Segoe UI',system-ui,sans-serif;color:var(--m)}
+.bar{height:6px;background:#232327;border-radius:999px;overflow:hidden;width:110px;display:inline-block;vertical-align:middle}.bar i{display:block;height:100%;background:var(--a);border-radius:999px}
 """
 
 
@@ -105,7 +105,7 @@ def to_html(report: dict[str, Any]) -> str:
     issues = "".join(f"<tr><td><span class='chip {'re' if i['severity'] == 'blocker' else 'fi' if i['severity'] == 'warning' else ''}'>"
                      f"{e(i['severity'])}</span></td><td class=mono>{e(i['stage'])}</td><td class=mono>{e(i['candidate_id'] or '—')}</td>"
                      f"<td>{e(i['message'])}</td></tr>" for i in report["issues"])
-    return f"""<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+    return f"""<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=stylesheet href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
 <title>{e(p['name'])} — automation assessment</title><style>{_CSS}</style></head><body><main>
 <div class=label>processlens · automation assessment</div><h1>{e(p['name'])}</h1>
 <p class=muted>{p['tasks']} tasks ({p['manual_tasks']} manual) · {len(p['lanes'])} lanes · {p['handoffs']} hand-offs ·

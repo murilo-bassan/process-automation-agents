@@ -5,64 +5,83 @@ const state = { report: null, selected: null, busy: false, files: { bpmn: null, 
 
 // ------------------------------------------------------------------ i18n (EN source strings are the keys)
 const PT = {
- "Analyze a process": "Analisar um processo",
- "LangGraph · 8 nodes": "LangGraph · 8 nós",
- "Description": "Descrição",
+ "Automation finder": "Buscador de automações",
+ "Send a process diagram (BPMN) and its written description. The AI suggests which steps to automate, and every suggestion has to quote the documents. Anything it can't back up is thrown out.":
+   "Envie o diagrama de um processo (BPMN) e a descrição escrita dele. A IA sugere quais etapas automatizar, e cada sugestão precisa citar os documentos. O que ela não consegue comprovar é descartado.",
+ "Choose a process": "Escolha um processo",
+ "Process diagram (BPMN)": "Diagrama do processo (BPMN)",
+ "Written description": "Descrição escrita",
  "choose file": "escolher arquivo",
- "Run analysis ▸": "Rodar análise ▸",
+ "Analyze": "Analisar",
  "analyzing…": "analisando…",
- "or a synthetic sample": "ou um exemplo sintético",
- "Pipeline run": "Execução do pipeline",
- "model": "modelo",
- "deterministic": "determinístico",
- "Priority matrix": "Matriz de prioridade",
- "impact × feasibility": "impacto × viabilidade",
- "feasibility →": "viabilidade →",
- "↑ impact": "↑ impacto",
- "quick wins": "ganhos rápidos",
- "Candidate": "Candidata",
- "Impact": "Impacto",
- "Feasibility": "Viabilidade",
- "Quadrant": "Quadrante",
- "Evidence — verified to exist": "Evidências — verificadas",
- "Questionnaire → rubric": "Questionário → rubrica",
- "Critic & traceability notes": "Notas da crítica e da rastreabilidade",
- "Process": "Processo",
- "Upload a BPMN and its description, or run a sample.": "Envie um BPMN e sua descrição, ou rode um exemplo.",
- "Models propose and answer; code verifies evidence and computes every score.": "O modelo propõe e responde; o código verifica as evidências e calcula cada nota.",
- "process automation agents": "agentes de automação de processos",
- "Quick win": "Ganho rápido",
- "Strategic": "Estratégico",
- "Fill-in": "Complementar",
- "Reconsider": "Reconsiderar",
- "tasks": "tarefas",
- "manual": "manuais",
- "hand-offs": "passagens",
- "sentences": "sentenças",
- "month": "mês",
+ "Or try an example": "Ou teste com um exemplo",
+ "Invoice intake (English)": "Recebimento de notas (inglês)",
+ "Travel reimbursement (Portuguese)": "Reembolso de viagem (português)",
+ "How the analysis ran": "Como a análise foi feita",
+ "AI": "IA",
+ "code": "código",
+ "Read diagram": "Ler diagrama", "Read text": "Ler texto", "AI suggests": "IA sugere", "AI reviews": "IA revisa",
+ "Check sources": "Conferir fontes", "AI answers checklist": "IA responde checklist", "Score": "Nota", "Final check": "Revisão final",
+ "Where to start": "Por onde começar",
+ "easier to do →": "mais fácil de fazer →",
+ "↑ bigger gain": "↑ maior ganho",
+ "start here": "comece por aqui",
+ "Suggestion": "Sugestão",
+ "Gain": "Ganho",
+ "Ease": "Facilidade",
+ "Verdict": "Veredito",
+ "Why": "Por quê",
+ "Where the documents say so": "Onde os documentos dizem isso",
+ "diagram": "diagrama",
+ "text": "texto",
+ "How the score was calculated": "Como a nota foi calculada",
+ "Points to double-check": "Pontos para conferir",
+ "The process": "O processo",
+ "Pick an example on the left to see a full analysis in a few seconds.": "Escolha um exemplo à esquerda para ver uma análise completa em poucos segundos.",
+ "The AI suggests and answers questions. Plain code checks every quote and calculates every score, so the result can be trusted.":
+   "A IA sugere e responde perguntas. Código comum confere cada citação e calcula cada nota, então dá para confiar no resultado.",
+ "Download": "Baixar",
+ "Start here": "Comece por aqui",
+ "Bigger project": "Projeto maior",
+ "If there's time": "Se sobrar tempo",
+ "Probably not worth it": "Talvez não valha",
+ "steps": "etapas",
+ "done by hand": "feitas à mão",
+ "hand-offs": "passagens de mão",
+ "cases / month": "casos / mês",
  "min / case": "min / caso",
- "survived": "sobreviveram",
+ "suggestions kept": "sugestões mantidas",
  "of": "de",
- "Candidates": "Candidatas",
+ "Suggestions": "Sugestões",
+ "Decision support": "Apoio à decisão", "Document AI": "Leitura de documentos com IA", "LLM triage": "Triagem com IA",
+ "Rules engine": "Regras automáticas", "API integration": "Integração por API", "RPA": "Robô de software (RPA)", "Auto-notify": "Aviso automático",
  "A human decision stays human; the system can pre-assemble the evidence and a recommendation.": "Decisão humana continua humana; o sistema pode reunir as evidências e uma recomendação.",
  "Field extraction from PDFs is a solved document-AI task with confidence scores and human review.": "Extrair campos de PDFs é tarefa resolvida de IA documental, com nível de confiança e revisão humana.",
  "Classification into a small fixed set of categories suits an LLM or a small classifier.": "Classificar num conjunto pequeno e fixo de categorias combina com um LLM ou um classificador leve.",
- "The check follows written criteria, so it can be expressed as deterministic rules.": "A conferência segue critérios escritos, então pode virar regras determinísticas.",
+ "The check follows written criteria, so it can be expressed as deterministic rules.": "A conferência segue critérios escritos, então pode virar regras automáticas.",
  "Re-typing data into a system of record is better replaced by an integration.": "Redigitar dados num sistema é melhor substituído por uma integração.",
- "Repetitive UI steps on stable screens are a fit for RPA.": "Passos repetitivos em telas estáveis combinam com RPA.",
- "Templated messages triggered by a state change are trivial to automate.": "Mensagens padronizadas disparadas por mudança de estado são triviais de automatizar.",
+ "Repetitive UI steps on stable screens are a fit for RPA.": "Passos repetitivos em telas estáveis combinam com um robô de software (RPA).",
+ "Templated messages triggered by a state change are trivial to automate.": "Mensagens padronizadas disparadas por mudança de estado são fáceis de automatizar.",
  "blocker": "bloqueio",
- "warning": "alerta",
- "info": "info"
+ "warning": "atenção",
+ "info": "info",
+ "critic": "revisão da IA", "trace": "conferência de fontes", "questionnaire": "checklist", "audit": "revisão final",
+ "not stated": "não informado"
 };
 let lang = (() => { try { return localStorage.getItem("lang"); } catch { return null; } })()
   || ((navigator.language || "").toLowerCase().startsWith("pt") ? "pt" : "en");
 const t = (s) => (lang === "pt" && PT[s]) || s;
 function setLang(l) { lang = l; try { localStorage.setItem("lang", l); } catch {} document.documentElement.lang = l === "pt" ? "pt-BR" : "en"; render(); }
 
+// The checklist questions, in plain words.
+const QUESTIONS = {
+  volume: ["How often it happens", "Com que frequência acontece"], time_per_case: ["Time spent per case", "Tempo gasto por caso"],
+  compliance_risk: ["Risk of compliance errors", "Risco de erro de conformidade"], rule_based: ["Follows clear rules", "Segue regras claras"],
+  digital_input: ["Input is already digital", "A entrada já é digital"], system_access: ["Systems can be reached", "Dá para acessar os sistemas"],
+  exception_rate: ["How often there are exceptions", "Frequência de exceções"], stability: ["The process is stable", "O processo é estável"],
+};
+const question = (q) => (QUESTIONS[q] || [q, q])[lang === "pt" ? 1 : 0];
 Object.assign(PT, {
-  volume: "volume", time_per_case: "tempo por caso", compliance_risk: "risco de conformidade", rule_based: "baseado em regras",
-  digital_input: "entrada digital", system_access: "acesso ao sistema", exception_rate: "taxa de exceção", stability: "estabilidade",
   high: "alta", medium: "média", low: "baixa",
   "the activity is audited": "a atividade é auditada", "no audit signal": "sem sinal de auditoria",
   "explicit criteria are documented": "há critérios explícitos documentados", "no written criteria found": "nenhum critério escrito encontrado",
@@ -130,8 +149,14 @@ function upload() {
   call("/v1/analyses", { method: "POST", body: form });
 }
 
-const QUAD = { quick_win: ["Quick win", "chip ok"], strategic: ["Strategic", "chip violet"], fill_in: ["Fill-in", "chip warn"], reconsider: ["Reconsider", "chip bad"] };
+const QUAD = { quick_win: ["Start here", "chip ok"], strategic: ["Bigger project", "chip violet"], fill_in: ["If there's time", "chip warn"], reconsider: ["Probably not worth it", "chip bad"] };
+const TECHNIQUE = { decision_support: "Decision support", document_ai: "Document AI", llm_classification: "LLM triage", rules_engine: "Rules engine",
+  api_integration: "API integration", rpa: "RPA", notification: "Auto-notify" };
+const STAGES = { parse_bpmn: "Read diagram", read_doc: "Read text", generate: "AI suggests", critic: "AI reviews", trace: "Check sources",
+  questionnaire: "AI answers checklist", score: "Score", audit: "Final check" };
 const LLM_STAGES = new Set(["generate", "critic", "questionnaire"]);
+const technique = (c) => t(TECHNIQUE[c.technique] || c.technique);
+const plainTitle = (c) => c.title.split(": ").slice(1).join(": ") || c.title;
 
 // ------------------------------------------------------------------ pieces
 
@@ -139,25 +164,28 @@ function picker(kind, label, accept) {
   const input = h("input", { type: "file", accept, style: "display:none", onchange: (e) => { state.files[kind] = e.target.files[0]; render(); } });
   const f = state.files[kind];
   return h("label", { class: "drop" + (f ? " has" : "") }, input,
-    h("div", { class: "label" }, label), h("div", { class: "mono", style: "margin-top:6px" }, f ? f.name : t("choose file")));
+    h("div", { style: "font-weight:500" }, label), h("div", { class: "label", style: "margin-top:6px" }, f ? f.name : t("choose file")));
 }
 
 function intake() {
   return h("section", { class: "card" },
-    h("header", {}, h("span", { class: "label" }, t("Analyze a process")), h("span", { class: "chip violet" }, t("LangGraph · 8 nodes"))),
+    h("header", {}, h("span", { class: "label" }, t("Choose a process"))),
     h("div", { class: "body stack" },
-      h("div", { class: "grid two", style: "gap:10px" }, picker("bpmn", "BPMN 2.0", ".bpmn,.xml"), picker("doc", t("Description"), ".md,.txt,.pdf")),
-      h("button", { class: "btn primary", disabled: !(state.files.bpmn && state.files.doc) || state.busy, onclick: upload }, state.busy ? t("analyzing…") : t("Run analysis ▸")),
-      h("div", { class: "row" }, h("span", { class: "label" }, t("or a synthetic sample")),
-        h("button", { class: "btn", onclick: () => sample("invoice-intake"), disabled: state.busy }, "invoice intake · EN"),
-        h("button", { class: "btn", onclick: () => sample("reembolso-viagem"), disabled: state.busy }, "reembolso · PT"))));
+      h("div", { class: "label" }, t("Or try an example")),
+      h("button", { class: "btn primary", onclick: () => sample(lang === "pt" ? "reembolso-viagem" : "invoice-intake"), disabled: state.busy },
+        state.busy ? t("analyzing…") : t(lang === "pt" ? "Travel reimbursement (Portuguese)" : "Invoice intake (English)")),
+      h("button", { class: "btn", onclick: () => sample(lang === "pt" ? "invoice-intake" : "reembolso-viagem"), disabled: state.busy },
+        t(lang === "pt" ? "Invoice intake (English)" : "Travel reimbursement (Portuguese)")),
+      h("div", { class: "grid two", style: "gap:10px;margin-top:8px" },
+        picker("bpmn", t("Process diagram (BPMN)"), ".bpmn,.xml"), picker("doc", t("Written description"), ".md,.txt,.pdf")),
+      h("button", { class: "btn", disabled: !(state.files.bpmn && state.files.doc) || state.busy, onclick: upload }, t("Analyze"))));
 }
 
 function pipeline(r) {
-  return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("Pipeline run")),
-    h("span", { class: "row" }, h("span", { class: "chip violet" }, t("model")), h("span", { class: "chip ok" }, t("deterministic")))),
-    h("div", { class: "pipeline" }, r.timings.map((t) => h("div", { class: "stage " + (LLM_STAGES.has(t.stage) ? "llm" : "rule") },
-      h("div", { class: "label" }, t.stage.replace("_", " ")), h("div", { class: "n" }, `${t.ms} ms`)))));
+  return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("How the analysis ran")),
+    h("span", { class: "row" }, h("span", { class: "chip violet" }, t("AI")), h("span", { class: "chip ok" }, t("code")))),
+    h("div", { class: "pipeline" }, r.timings.map((s) => h("div", { class: "stage " + (LLM_STAGES.has(s.stage) ? "llm" : "rule") },
+      h("div", { class: "n" }, t(STAGES[s.stage] || s.stage)), h("div", { class: "label" }, `${s.ms} ms`)))));
 }
 
 function matrix(r) {
@@ -167,26 +195,27 @@ function matrix(r) {
     const n = (taken[key] = (taken[key] ?? -1) + 1);
     return `left:calc(${(4 + c.score.feasibility * 92).toFixed(1)}% + ${n * 34}px);bottom:${(4 + c.score.impact * 88).toFixed(1)}%`;
   };
-  return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("Priority matrix")), h("span", { class: "muted mono" }, t("impact × feasibility"))),
+  return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("Where to start"))),
     h("div", { class: "body" }, h("div", { class: "matrix" },
-      h("span", { class: "ax", style: "right:10px;bottom:8px" }, t("feasibility →")),
-      h("span", { class: "ax", style: "left:10px;top:8px" }, t("↑ impact")),
-      h("span", { class: "ax", style: "right:10px;top:8px;color:var(--accent)" }, t("quick wins")),
+      h("span", { class: "ax", style: "right:10px;bottom:8px" }, t("easier to do →")),
+      h("span", { class: "ax", style: "left:10px;top:8px" }, t("↑ bigger gain")),
+      h("span", { class: "ax", style: "right:10px;top:8px;color:var(--accent)" }, t("start here")),
       r.candidates.map((c) => h("span", {
-        class: `mdot ${c.score.quadrant}`, title: c.title,
+        class: `mdot ${c.score.quadrant}`, title: plainTitle(c),
         style: place(c),
         onclick: () => { state.selected = c.id; render(); },
       }, c.id)))));
 }
 
 function table(r) {
-  return h("section", { class: "card scroll" }, h("header", {}, h("span", { class: "label" }, `${t("Candidates")} · ${r.candidates.length} ${t("of")} ${r.proposed} ${t("survived")}`)),
-    h("table", {}, h("thead", {}, h("tr", {}, ["#", t("Candidate"), t("Impact"), t("Feasibility"), t("Quadrant")].map((c) => h("th", {}, c)))),
+  return h("section", { class: "card scroll" }, h("header", {}, h("span", { class: "label" }, t("Suggestions")),
+    h("span", { class: "muted" }, `${r.candidates.length} ${t("of")} ${r.proposed} ${t("suggestions kept")}`)),
+    h("table", {}, h("thead", {}, h("tr", {}, ["#", t("Suggestion"), t("Gain"), t("Ease"), t("Verdict")].map((c) => h("th", {}, c)))),
       h("tbody", {}, r.candidates.map((c) => h("tr", { class: "clickable" + (c.id === state.selected ? " active" : ""), onclick: () => { state.selected = c.id; render(); } },
-        h("td", { class: "mono" }, c.id),
-        h("td", {}, h("div", {}, c.title.split(": ").slice(1).join(": ")), h("div", { class: "hash" }, c.title.split(": ")[0])),
-        h("td", {}, h("div", { class: "bar" }, h("i", { style: `width:${c.score.impact * 100}%` })), h("span", { class: "hash" }, c.score.impact.toFixed(2))),
-        h("td", {}, h("div", { class: "bar" }, h("i", { style: `width:${c.score.feasibility * 100}%` })), h("span", { class: "hash" }, c.score.feasibility.toFixed(2))),
+        h("td", { class: "muted" }, c.id),
+        h("td", {}, h("div", {}, plainTitle(c)), h("div", { class: "label" }, technique(c))),
+        h("td", {}, h("div", { class: "bar" }, h("i", { style: `width:${c.score.impact * 100}%` }))),
+        h("td", {}, h("div", { class: "bar" }, h("i", { style: `width:${c.score.feasibility * 100}%` }))),
         h("td", {}, h("span", { class: QUAD[c.score.quadrant][1] }, t(QUAD[c.score.quadrant][0]))))))));
 }
 
@@ -195,27 +224,41 @@ function detail(r) {
   if (!c) return null;
   const issues = r.issues.filter((i) => i.candidate_id === c.id);
   return h("section", { class: "card" },
-    h("header", {}, h("div", {}, h("div", { class: "label" }, `${c.id} · ${c.technique}`), h("b", {}, c.title)),
+    h("header", {}, h("div", {}, h("div", { class: "label" }, `${t("Suggestion")} ${c.id} · ${technique(c)}`), h("b", { style: "font-size:18px" }, plainTitle(c))),
       h("span", { class: QUAD[c.score.quadrant][1] }, t(QUAD[c.score.quadrant][0]))),
     h("div", { class: "body stack" },
-      h("p", { class: "muted", style: "margin:0" }, t(c.rationale)),
-      h("div", { class: "label" }, t("Evidence — verified to exist")),
-      c.evidence.map((e) => h("div", { class: "row", style: "align-items:flex-start" }, h("span", { class: e.source === "bpmn" ? "chip violet" : "chip ok" }, `${e.source}:${e.ref}`), h("q", {}, e.quote))),
-      h("div", { class: "label", style: "margin-top:6px" }, t("Questionnaire → rubric")),
+      h("div", { class: "label" }, t("Why")),
+      h("p", { style: "margin:0" }, t(c.rationale)),
+      h("div", { class: "label", style: "margin-top:8px" }, t("Where the documents say so")),
+      c.evidence.map((e) => h("div", { class: "row", style: "align-items:flex-start;flex-wrap:nowrap" },
+        h("span", { class: e.source === "bpmn" ? "chip violet" : "chip ok" }, e.source === "bpmn" ? t("diagram") : `${t("text")} ${e.ref}`), h("q", {}, e.quote))),
+      h("div", { class: "label", style: "margin-top:8px" }, t("How the score was calculated")),
       h("table", {}, h("tbody", {}, c.score.answers.map((a) => h("tr", {},
-        h("td", { class: "mono" }, t(a.question)),
-        h("td", {}, h("span", { class: a.answer === "NI" ? "chip bad" : a.answer === "high" ? "chip ok" : "chip" }, t(a.answer))),
-        h("td", { class: "mono", title: a.evidence_ref ? r.sentences[a.evidence_ref] : "" }, a.evidence_ref || "—"),
-        h("td", { class: "muted" }, tj(a.justification)),
-        h("td", { class: "hash" }, `+${(c.score.breakdown[a.question] ?? 0).toFixed(2)}`))))),
+        h("td", {}, question(a.question)),
+        h("td", {}, h("span", { class: a.answer === "NI" ? "chip bad" : a.answer === "high" ? "chip ok" : "chip" }, a.answer === "NI" ? t("not stated") : t(a.answer))),
+        h("td", { class: "muted", title: a.evidence_ref ? r.sentences[a.evidence_ref] : "" }, tj(a.justification)),
+        h("td", { class: "muted", style: "text-align:right" }, `+${(c.score.breakdown[a.question] ?? 0).toFixed(2)}`))))),
       issues.length ? h("div", { class: "stack" }, issues.map((i) => h("div", { class: "row" }, h("span", { class: i.severity === "blocker" ? "chip bad" : i.severity === "warning" ? "chip warn" : "chip" }, t(i.severity)), h("span", { class: "muted" }, i.message)))) : null));
 }
 
 function notes(r) {
   const global = r.issues.filter((i) => i.stage !== "audit" || !i.candidate_id);
   if (!global.length) return null;
-  return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("Critic & traceability notes"))),
-    h("div", { class: "body stack" }, global.map((i) => h("div", { class: "row" }, h("span", { class: i.severity === "blocker" ? "chip bad" : "chip warn" }, i.stage), h("span", { class: "mono" }, i.candidate_id || ""), h("span", { class: "muted" }, i.message)))));
+  return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("Points to double-check"))),
+    h("div", { class: "body stack" }, global.map((i) => h("div", { class: "stack", style: "gap:4px" },
+      h("div", { class: "row" }, h("span", { class: i.severity === "blocker" ? "chip bad" : "chip warn" }, t(i.stage)), i.candidate_id ? h("span", { class: "muted" }, i.candidate_id) : null),
+      h("span", { class: "muted" }, i.message)))));
+}
+
+function processCard(r) {
+  const f = r.document.facts;
+  return h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("The process"))), h("div", { class: "body stack" },
+    h("b", { style: "font-size:16px" }, r.process.name),
+    h("div", { class: "meta-row" }, h("span", { class: "chip" }, `${r.process.tasks} ${t("steps")}`), h("span", { class: "chip" }, `${r.process.manual_tasks} ${t("done by hand")}`),
+      h("span", { class: "chip" }, `${r.process.handoffs} ${t("hand-offs")}`)),
+    h("div", { class: "meta-row" }, f.monthly_volume != null ? h("span", { class: "chip ok" }, `${f.monthly_volume} ${t("cases / month")}`) : null,
+      f.minutes_per_case != null ? h("span", { class: "chip ok" }, `${f.minutes_per_case} ${t("min / case")}`) : null),
+    h("div", { class: "meta-row" }, f.systems.map((s) => h("span", { class: "chip violet" }, s)))));
 }
 
 function render() {
@@ -223,24 +266,18 @@ function render() {
   root.replaceChildren(h("div", { class: "main" },
     h("div", { class: "topbar" },
       h("div", { class: "row", style: "gap:14px" }, h("div", { class: "brand-mark" }, h("i"), h("i"), h("i"), h("i")),
-        h("div", {}, h("div", { class: "label" }, t("process automation agents")), h("h1", {}, "processlens"))),
-      h("div", { class: "row" }, langToggle(), r ? h("div", { class: "row" }, ["html", "md", "docx"].map((f) => h("a", { class: "btn", href: `/v1/analyses/${r.id}/report.${f}`, target: "_blank" }, `.${f}`)),
-        h("a", { class: "btn ghost", href: `/v1/analyses/${r.id}`, target: "_blank" }, ".json")) : null)),
+        h("div", {}, h("h1", { style: "margin:0" }, "processlens"), h("div", { class: "label" }, t("Automation finder")))),
+      h("div", { class: "row" }, r ? h("div", { class: "row" }, h("span", { class: "label" }, t("Download")),
+        [["docx", "Word"], ["html", "HTML"], ["md", "Markdown"]].map(([f, name]) => h("a", { class: "btn", href: `/v1/analyses/${r.id}/report.${f}`, target: "_blank" }, name)),
+        h("a", { class: "btn ghost", href: `/v1/analyses/${r.id}`, target: "_blank" }, "JSON")) : null, langToggle())),
     h("div", { class: "content" },
-      h("div", { class: "grid split", style: "grid-template-columns:360px minmax(0,1fr)" },
-        h("div", { class: "stack", style: "gap:20px" }, intake(),
-          r ? h("section", { class: "card" }, h("header", {}, h("span", { class: "label" }, t("Process"))), h("div", { class: "body stack" },
-            h("b", {}, r.process.name),
-            h("div", { class: "meta-row" }, h("span", { class: "chip" }, `${r.process.tasks} ${t("tasks")}`), h("span", { class: "chip" }, `${r.process.manual_tasks} ${t("manual")}`),
-              h("span", { class: "chip" }, `${r.process.handoffs} ${t("hand-offs")}`), h("span", { class: "chip" }, `${r.document.sentences} ${t("sentences")}`)),
-            h("div", { class: "meta-row" }, h("span", { class: "chip ok" }, `${r.document.facts.monthly_volume ?? "NI"} / ${t("month")}`),
-              h("span", { class: "chip ok" }, `${r.document.facts.minutes_per_case ?? "NI"} ${t("min / case")}`)),
-            h("div", { class: "meta-row" }, r.document.facts.systems.map((s) => h("span", { class: "chip violet" }, s))))) : null,
-          r ? notes(r) : null),
-        r ? h("div", { class: "stack", style: "gap:20px" }, pipeline(r),
-          h("div", { class: "grid", style: "grid-template-columns:340px minmax(0,1fr);align-items:start" }, matrix(r), table(r)), detail(r))
-          : h("section", { class: "card empty" }, h("p", {}, t("Upload a BPMN and its description, or run a sample.")),
-            h("p", { class: "muted" }, t("Models propose and answer; code verifies evidence and computes every score.")))))));
+      h("p", { class: "intro" }, t("Send a process diagram (BPMN) and its written description. The AI suggests which steps to automate, and every suggestion has to quote the documents. Anything it can't back up is thrown out.")),
+      h("div", { class: "grid split", style: "grid-template-columns:340px minmax(0,1fr)" },
+        h("div", { class: "stack", style: "gap:20px" }, intake(), r ? processCard(r) : null, r ? notes(r) : null),
+        r ? h("div", { class: "stack", style: "gap:20px" },
+          h("div", { class: "grid", style: "grid-template-columns:340px minmax(0,1fr);align-items:start" }, matrix(r), table(r)), detail(r), pipeline(r))
+          : h("section", { class: "card empty" }, h("p", { style: "color:var(--ink);font-size:17px" }, t("Pick an example on the left to see a full analysis in a few seconds.")),
+            h("p", { class: "muted" }, t("The AI suggests and answers questions. Plain code checks every quote and calculates every score, so the result can be trusted.")))))));
 }
 
 render();
